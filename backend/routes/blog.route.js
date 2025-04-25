@@ -17,7 +17,7 @@ const blogRouter = express.Router();
 
 blogRouter.post("/createBlog", auth, AddingBlog);
 blogRouter.get("/getBlog", auth, getBlog);
-blogRouter.get("/getLatestBlog", auth, getAllBlogs);
+blogRouter.get("/getLatestBlog", getAllBlogs);
 blogRouter.get("getBlogByUser", auth, getBlogsByUser);
 blogRouter.get("/getBlog/:id", auth, getBlogById);
 blogRouter.get("/getBlogByTag/:tag", auth, getBlogsByTag);
