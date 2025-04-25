@@ -6,15 +6,22 @@ dotenv.config();
 
 export const userRegister = async (req, res) => {
   try {
-    console.log("req.body is", req.body);
     const { username, email, password } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+    if (password.length < 8) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 8 characters long" });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, email, password: hashedPassword });
     await user.save();
-    res.status(201).json({ message: "user created successfully", user });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    // res.status(400).json({ message: error.message });
-    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
