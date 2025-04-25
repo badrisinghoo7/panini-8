@@ -1,11 +1,13 @@
 import express from "express";
 import connection from "./db/db.js";
 import userRouter from "./routes/user.route.js";
+import cors from "cors";
 import blogRouter from "./routes/blog.route.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.get("/", (req, res) => {
   res.send("Hello this is for checking home page");
 });
