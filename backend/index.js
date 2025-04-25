@@ -12,8 +12,8 @@ app.get("/", (req, res) => {
   res.send("Hello this is for checking home page");
 });
 app.use(express.json());
-app.use("/users", userRouter);
-app.use("/blogs", blogRouter);
+app.use("/user", userRouter);
+app.use("/blog", blogRouter);
 
 app.listen(port, async () => {
   try {
