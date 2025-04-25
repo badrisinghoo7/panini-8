@@ -7,7 +7,7 @@ import blogRouter from "./routes/blog.route.js";
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.get("/", (req, res) => {
   res.send("Hello this is for checking home page");
 });
