@@ -10,6 +10,11 @@ const blogSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      require: true,
+    },
     tags: {
       type: String,
       required: true,
@@ -36,10 +41,7 @@ const blogSchema = mongoose.Schema(
       },
     ],
 
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+    
   },
   {
     timestamps: true,

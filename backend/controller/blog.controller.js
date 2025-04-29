@@ -137,22 +137,33 @@ export const updateBlog = async (req, res) => {
 export const deleteBlog = async (req, res) => {
   try {
     const blogId = req.params.id;
+    console.log("blogId is", blogId);
+
     const userId = req.user.userId;
 
     // Step 1: Find the blog
     const blog = await Blog.findById(blogId);
+
+    console.log("blog is", blogId);
 
     // Step 2: Check if the blog exists
     if (!blog) {
       return res.status(404).json({ message: "Blog post not found" });
     }
     // Step 3: Check ownership
+    console.log(
+      "blogId is blog.createdBy.toString()",
+      blog.createdBy.toString()
+    );
+
     if (blog.createdBy.toString() !== userId.toString()) {
       return res
         .status(403)
         .json({ message: "You are not authorized to delete this blog" });
     }
     // Step 4: Perform delete
+    // console.log("blog is", blog);
+
     await Blog.findByIdAndDelete(blogId);
     res.status(200).json({ message: "Blog post deleted successfully" });
   } catch (error) {
